@@ -201,6 +201,12 @@ class ExportGLTF2_Base():
             default=True
     )
 
+    export_single_animation = BoolProperty(
+            name='Export single animation',
+            description='Export all actions a as a single animation',
+            default=False
+    )
+
     export_frame_range = BoolProperty(
             name='Export within playback range',
             description='',
@@ -342,11 +348,13 @@ class ExportGLTF2_Base():
         export_settings['gltf_apply'] = self.export_apply
         export_settings['gltf_animations'] = self.export_animations
         if self.export_animations:
+            export_settings['gltf_single_animation'] = self.export_single_animation
             export_settings['gltf_current_frame'] = False
             export_settings['gltf_frame_range'] = self.export_frame_range
             export_settings['gltf_move_keyframes'] = self.export_move_keyframes
             export_settings['gltf_force_sampling'] = self.export_force_sampling
         else:
+            export_settings['gltf_single_animation'] = False
             export_settings['gltf_current_frame'] = self.export_current_frame
             export_settings['gltf_frame_range'] = False
             export_settings['gltf_move_keyframes'] = False
@@ -423,6 +431,7 @@ class ExportGLTF2_Base():
         col.label('Animation:', icon='OUTLINER_DATA_POSE')
         col.prop(self, 'export_animations')
         if self.export_animations:
+            col.prop(self, 'export_single_animation')
             col.prop(self, 'export_frame_range')
             col.prop(self, 'export_frame_step')
             col.prop(self, 'export_move_keyframes')

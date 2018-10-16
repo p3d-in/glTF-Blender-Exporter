@@ -625,15 +625,18 @@ def generate_animations(operator,
 
         #
 
-        if blender_action.name not in animations:
-            animations[blender_action.name] = {
-                'name': blender_action.name,
+        action_name = blender_action.name
+        if export_settings['gltf_single_animation']:
+            action_name = 'defaultAction'
+        if action_name not in animations:
+            animations[action_name] = {
+                'name': action_name,
                 'channels': [],
                 'samplers': []
             }
 
-        channels = animations[blender_action.name]['channels']
-        samplers = animations[blender_action.name]['samplers']
+        channels = animations[action_name]['channels']
+        samplers = animations[action_name]['samplers']
 
         # Add entry to joint cache. Current action may not need skinnning,
         # but there are too many places to check for and add it later.
@@ -750,15 +753,18 @@ def generate_animations(operator,
 
         #
 
-        if blender_action.name not in animations:
-            animations[blender_action.name] = {
-                'name': blender_action.name,
+        action_name = blender_action.name
+        if export_settings['gltf_single_animation']:
+            action_name = 'defaultAction'
+        if action_name not in animations:
+            animations[action_name] = {
+                'name': action_name,
                 'channels': [],
                 'samplers': []
             }
 
-        channels = animations[blender_action.name]['channels']
-        samplers = animations[blender_action.name]['samplers']
+        channels = animations[action_name]['channels']
+        samplers = animations[action_name]['samplers']
 
         #
 
